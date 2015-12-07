@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/19 19:15:07 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/07 12:54:42 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/07 14:30:07 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int			expose_hook(t_mlx *s)
 		mlx_destroy_image(s->mlx, s->img);
 	if ((s->img = mlx_new_image(s->mlx, WIN_MAX_X, WIN_MAX_Y)) != NULL)
 	{
-		//	s->max_ite = abs(s->zoom)/5;
 		if (s->type == 1)
 			mandle_set(s);
+		else if (s->type == 3)
+			sierp_set(s);
 
 		mlx_clear_window(s->mlx, s->win);
 		mlx_put_image_to_window(s->mlx, s->win, s->img, 0, 0);
@@ -32,16 +33,16 @@ int			mouse_hook(int btn, int x, int y, t_mlx *s)
 {
 	if (btn == 4)
 	{	
-		s->x_start += (s->x_start - x) / (s->zoom / 100) ;
-		s->y_start += (s->y_start - y) / (s->zoom / 100) ;
-		s->zoom += 50;
+		s->x_start += (s->x_start - x) / (s->zoom / 10) ;
+		s->y_start += (s->y_start - y) / (s->zoom / 10) ;
+		s->zoom += 10;
 
 	}
 	else if (btn == 5)
 	{	
-		s->x_start += ((s->x_start - x) * (x != s->x0)) / (s->zoom / 100) ;
-		s->y_start += ((s->y_start - y) * (y != s->y0)) / (s->zoom / 100) ;
-		s->zoom -= 50;
+		s->x_start += (s->x_start - x) / (s->zoom / 10) ;
+		s->y_start += (s->y_start - y) / (s->zoom / 10) ;
+		s->zoom -= 10;
 	}
 	printf("%d||%d\n", s->x_start, s->y_start);
 	mlx_clear_window(s->mlx, s->win);
@@ -73,6 +74,10 @@ int			key_hook(int key, t_mlx *s)
 		s->y_start -= 20;
 	else if (key == 125)
 		s->y_start += 20;
+	else if (key == 116)
+		s->max_step += 5;
+	else if (key == 121)
+		s->max_step -= 5;
 	expose_hook(s);
 	return (0);
 }
@@ -87,6 +92,7 @@ void		win_init(t_mlx s, char *name)
 		{
 			s.zoom = 100;
 			s.color = 16777215;
+			s.max_step = 6;
 			mlx_expose_hook(s.win, &expose_hook, &s);
 			mlx_key_hook(s.win, &key_hook, &s);
 			mlx_mouse_hook(s.win, &mouse_hook, &s);

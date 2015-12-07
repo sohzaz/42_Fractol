@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 10:20:16 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/07 12:54:42 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/07 14:34:48 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,32 @@ void				mandle_set(t_mlx *s)
 		y--;
 	}
 
+}
+
+void				sierp_set(t_mlx *s)
+{
+	int				x;
+	int				y;
+	int				step;
+
+	y = 0;
+	while (y < WIN_MAX_Y)
+	{
+		x = 0;
+		while (x < WIN_MAX_X)
+		{
+			step = 0;
+			while (step < s->max_step)
+			{
+				if (((((x*s->zoom)/(long)(pow(3, step))) % 3) != 1)
+						&& ((((s->zoom * y)/(long)(pow(3, step))) % 3) != 1))
+					step++;
+				else
+					break;
+			}
+			put_in_image(s, x, y, s->color * !(step == s->max_step));
+			x++;
+		}
+		y++;
+	}
 }
