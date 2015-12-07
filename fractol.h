@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/20 15:11:58 by dbreton           #+#    #+#             */
-/*   Updated: 2015/10/26 14:42:14 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/07 12:54:42 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
-# define WIN_MAX_X 1080 
-# define WIN_MAX_Y 600 
+# define WIN_MAX_X 1960 
+# define WIN_MAX_Y 1080  
 # define SCREEN_RATIO WIN_MAX_X/WIN_MAX_Y
 
 typedef struct		s_mlxdata{

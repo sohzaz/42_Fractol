@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/02 10:27:23 by dbreton           #+#    #+#             */
-/*   Updated: 2015/10/26 15:04:51 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/07 12:54:42 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ int			main(int ac, char **av)
 	char	*name = NULL;
 	t_mlx	s;
 
-	s.y_start = WIN_MAX_X / 2;
-	s.x_start = WIN_MAX_Y / 2;
-	s.max_ite = 300;
+	s.x_start = WIN_MAX_X / 2;
+	s.y_start = WIN_MAX_Y / 2;
+	s.max_ite = 30;
 	if (ac == 2)
 	{
 				if (av[1][0] == '1')
