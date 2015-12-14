@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 10:20:16 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/07 14:34:48 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/14 12:33:33 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ static void			mandle_ite(t_mlx *s, int x, int y)
 		s->z_i = 2 * s->z_i * tmp + s->c_i;
 		i += 1;
 	}
-	if (i == s->max_ite)
-		put_in_image(s, x, y, 0);
-	else
-		put_in_image(s, x,y , (int)s->z_r * 1000000);
+	//	put_in_image(s, x,y , ((int)s->z_r * 1000000) * (i != s->max_ite));
+
+	put_in_image(s, x, y, i * 111111111 * !(i == s->max_ite));
 
 }
 
@@ -56,28 +55,31 @@ void				mandle_set(t_mlx *s)
 
 }
 
-void				sierp_set(t_mlx *s)
+int					sierp_carp_draw(t_mlx *s,int x, int y)
+{
+	while (x > 0 || y > 0)
+	{
+		if ((x /s->zoom)% 3 == 1 &&(y / s->zoom )% 3 == 1)
+			return (0);
+		y /= 3;
+		x /= 3;
+	}
+	return (16777215);
+}
+
+void				sierp_carp_set(t_mlx *s)
 {
 	int				x;
 	int				y;
-	int				step;
 
 	y = 0;
-	while (y < WIN_MAX_Y)
+	dprintf(2,"%d\n", s->zoom);
+	while ((y) < WIN_MAX_Y)
 	{
 		x = 0;
-		while (x < WIN_MAX_X)
+		while ((x) < WIN_MAX_X)
 		{
-			step = 0;
-			while (step < s->max_step)
-			{
-				if (((((x*s->zoom)/(long)(pow(3, step))) % 3) != 1)
-						&& ((((s->zoom * y)/(long)(pow(3, step))) % 3) != 1))
-					step++;
-				else
-					break;
-			}
-			put_in_image(s, x, y, s->color * !(step == s->max_step));
+			put_in_image(s, x, y,sierp_carp_draw(s, x, y));
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/20 15:11:58 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/07 14:20:45 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/14 12:38:29 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,8 @@ void				win_init(t_mlx s, char *name);
 void				win_draw(t_mlx s);
 void				put_in_image(t_mlx *s, int x, int y, int color);
 void				mandle_set(t_mlx *s);
-void				sierp_set(t_mlx *s);
+void				sierp_carp_set(t_mlx *s);
+int					mouse_zoom_handler(int btn, int x, int y, t_mlx *s);
+int			        key_win_handler(int key, t_mlx *s);
+int					frac_select(int key, t_mlx *s);
 #endif

@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/02 10:27:23 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/07 14:04:16 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/14 11:46:13 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int			main(int ac, char **av)
 	char	*name = NULL;
 	t_mlx	s;
 
-	s.x_start = WIN_MAX_X / 2;
-	s.y_start = WIN_MAX_Y / 2;
 	s.max_ite = 30;
 	if (ac == 2)
 	{
@@ -43,6 +41,9 @@ int			main(int ac, char **av)
 		else if (av[1][0] == '3')
 			name = name_assign("Sierpinski Carpet");
 		s.type = ft_atoi(av[1]);
+		s.x_start = (WIN_MAX_X / 2) * !(s.type == 3);
+		s.y_start = (WIN_MAX_Y / 2) * !(s.type == 3);
+
 		win_init(s, name);
 	}
 	return (0);
