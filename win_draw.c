@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 10:20:16 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/14 12:33:33 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/14 13:16:29 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,12 @@ void				mandle_set(t_mlx *s)
 
 int					sierp_carp_draw(t_mlx *s,int x, int y)
 {
+	(void)s;
+	x %= s->zoom;
+	y %= s->zoom;
 	while (x > 0 || y > 0)
 	{
-		if ((x /s->zoom)% 3 == 1 &&(y / s->zoom )% 3 == 1)
+		if (x% 3 == 1 && y% 3 == 1)
 			return (0);
 		y /= 3;
 		x /= 3;
@@ -73,13 +76,13 @@ void				sierp_carp_set(t_mlx *s)
 	int				y;
 
 	y = 0;
-	dprintf(2,"%d\n", s->zoom);
-	while ((y) < WIN_MAX_Y)
+	while (y < WIN_MAX_Y)
 	{
 		x = 0;
-		while ((x) < WIN_MAX_X)
+		while (x < WIN_MAX_X)
 		{
-			put_in_image(s, x, y,sierp_carp_draw(s, x, y));
+			put_in_image(s, x, y,sierp_carp_draw(s,
+						x + s->x_start,y + s->y_start));
 			x++;
 		}
 		y++;
