@@ -6,13 +6,13 @@
 #    By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/25 07:46:46 by dbreton           #+#    #+#              #
-#    Updated: 2015/12/14 10:45:39 by dbreton          ###   ########.fr        #
+#    Updated: 2015/12/17 14:55:56 by dbreton          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol 
 OS = $(shell uname)
-CFLAGS = -Wall -Wextra -Werror -O2
+CFLAGS = -Wall -Wextra -Werror -Ofast 
 SRC = main.c draw_tools.c win_draw.c win_init.c win_handlers.c 
 ifeq ($(OS), Darwin) 
 	MLX = minlibx

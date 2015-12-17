@@ -6,18 +6,35 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 10:20:16 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/14 13:16:29 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/17 13:21:49 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+static int			mandle_color(const t_mlx *s, const int i)
+{
+	int				col;
+	int				v;
+
+	if (s->color == 1)
+		col = (255 * (3 * i) * 255 * 255) * (i < s->max_ite);
+	else
+	{
+		v = round(i + 1 - (log2(log(hypot(s->z_r, s->z_i))/log(2))));
+		col = (255 * (2 * v) * 255 * 255) * (i < s->max_ite);
+	}
+	return (col);
+
+}
 static void			mandle_ite(t_mlx *s, int x, int y)
 {
 	int i;
+	int max_color;
 	double tmp;
 
 	i = 0;
+	max_color = 16711680;
 	while ((pow(s->z_r, 2) + pow(s->z_i, 2) < 4) && (i < s->max_ite))
 	{
 
@@ -26,9 +43,7 @@ static void			mandle_ite(t_mlx *s, int x, int y)
 		s->z_i = 2 * s->z_i * tmp + s->c_i;
 		i += 1;
 	}
-	//	put_in_image(s, x,y , ((int)s->z_r * 1000000) * (i != s->max_ite));
-
-	put_in_image(s, x, y, i * 111111111 * !(i == s->max_ite));
+	put_in_image(s, x, y, mandle_color(s, i));
 
 }
 

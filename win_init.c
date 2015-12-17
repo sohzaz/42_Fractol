@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/19 19:15:07 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/14 12:38:54 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/17 15:02:45 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int			key_hook(int key, t_mlx *s)
 
 void		win_init(t_mlx s, char *name)
 {
+
+		write(2, "C", 1);
 	if ((s.mlx = mlx_init()) != NULL)
 	{
 		s.win = mlx_new_window(s.mlx, WIN_MAX_X, WIN_MAX_Y, name);
@@ -59,6 +61,8 @@ void		win_init(t_mlx s, char *name)
 			mlx_expose_hook(s.win, &expose_hook, &s);
 			mlx_key_hook(s.win, &key_hook, &s);
 			mlx_mouse_hook(s.win, &mouse_hook, &s);
+			write(2, "B", 1);
+//			mlx_hook(s.mlx, MOTION_NOTIFY, PTR_MOTION_MASK, &ptr_motion_hook, &s);
 			mlx_loop(s.mlx);
 		}
 	}

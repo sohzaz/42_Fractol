@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 10:39:09 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/14 12:37:45 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/17 14:52:01 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,21 @@ int			frac_select(int key, t_mlx *s)
 		s->type = 1;
 	else if (key == 20)
 		s->type = 3;
+	else if (key == 83)
+		s->color = 2;
+	else if (key == 84)
+		s->color = 1;
+	return (0);
+}
+int				ptr_motion_hook(int x, int y, t_mlx *s)
+{
+	write(1, "A", 1);
+	if (x >= 0 && y >= 0 && x <= WIN_MAX_X && y <= WIN_MAX_Y)
+	{
+		s->c_r = (double)x / (double)WIN_MAX_X * 4 - 2;
+		s->c_i = (double)y / (double)WIN_MAX_Y * 4 - 2;
+	}
+	expose_hook(s);
 	return (0);
 }
 
