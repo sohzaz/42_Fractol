@@ -6,10 +6,9 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 10:39:09 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/17 14:52:01 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/21 13:28:07 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "fractol.h"
 
@@ -48,7 +47,6 @@ int			frac_select(int key, t_mlx *s)
 }
 int				ptr_motion_hook(int x, int y, t_mlx *s)
 {
-	write(1, "A", 1);
 	if (x >= 0 && y >= 0 && x <= WIN_MAX_X && y <= WIN_MAX_Y)
 	{
 		s->c_r = (double)x / (double)WIN_MAX_X * 4 - 2;
@@ -57,19 +55,37 @@ int				ptr_motion_hook(int x, int y, t_mlx *s)
 	expose_hook(s);
 	return (0);
 }
+void		key_zoom_handler(int key, t_mlx *s)
+{
+	int		x;
+	int		y;
 
+	x = WIN_MAX_X / 2;
+	y = WIN_MAX_Y / 2;
+	if (key == 69)
+	{
+		s->x_start += (s->x_start - x) / (s->zoom / 100);
+		s->y_start += (s->y_start - y) / (s->zoom / 100);
+
+		s->zoom += 100;
+	}
+	else if (key == 78)
+	{
+		s->x_start += (s->x_start - x) / (s->zoom / 100) ;
+		s->y_start += (s->y_start - y) / (s->zoom / 100) ;
+		s->zoom -= 100;
+	}
+
+}
 int			key_win_handler(int key, t_mlx *s)
 {
+	key_zoom_handler(key, s);
 	if (key == 53)
 		exit(0);
-	else if (key == 69)
-		s->zoom += 100;
-	else if (key == 78)
-		s->zoom -= 100;
 	else if (key == 67)
-		s->max_ite += 10;
+		s->max_ite += 5;
 	else if (key == 75 && s->max_ite > 10)
-		s->max_ite -= 10;
+		s->max_ite -= 5;
 	else if (key == 123)
 		s->x_start -= 20;
 	else if (key == 124)
@@ -78,10 +94,7 @@ int			key_win_handler(int key, t_mlx *s)
 		s->y_start -= 20;
 	else if (key == 125)
 		s->y_start += 20;
-	else if (key == 116)
-		s->max_step += 5;
-	else if (key == 121)
-		s->max_step -= 5;
 	s->zoom = (s->zoom <= 1) ? 1 : s->zoom;
 	return (0);
 }
+

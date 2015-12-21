@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/20 15:11:58 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/17 14:48:43 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/21 12:43:16 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@
 # include <stdio.h>
 # define WIN_MAX_X 1960 
 # define WIN_MAX_Y 1080  
-# define SCREEN_RATIO WIN_MAX_X/WIN_MAX_Y
 # define PTR_MOTION_MASK (1L << 6)
-# define MOTION_NOTIFY 7 
+# define MOTION_NOTIFY 6 
 
 typedef struct		s_mlxdata{
 	void			*mlx;
@@ -45,7 +44,6 @@ typedef struct		s_mlxdata{
 	double			z_i;
 	int				xmax;
 	int				ymax;
-	int				max_step;
 }					t_mlx;
 void				win_init(t_mlx s, char *name);
 void				win_draw(t_mlx s);
@@ -57,4 +55,5 @@ int			        key_win_handler(int key, t_mlx *s);
 int					frac_select(int key, t_mlx *s);
 int					ptr_motion_hook(int x, int y, t_mlx *s);
 int					expose_hook(t_mlx *s);
+void				julia_set(t_mlx *s);
 #endif

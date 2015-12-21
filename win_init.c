@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/19 19:15:07 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/17 15:02:45 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/21 13:00:26 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int			expose_hook(t_mlx *s)
 	{
 		if (s->type == 1)
 			mandle_set(s);
+		else if (s->type == 2)
+			julia_set(s);
 		else if (s->type == 3)
 			sierp_carp_set(s);
 
@@ -47,8 +49,6 @@ int			key_hook(int key, t_mlx *s)
 
 void		win_init(t_mlx s, char *name)
 {
-
-		write(2, "C", 1);
 	if ((s.mlx = mlx_init()) != NULL)
 	{
 		s.win = mlx_new_window(s.mlx, WIN_MAX_X, WIN_MAX_Y, name);
@@ -57,12 +57,13 @@ void		win_init(t_mlx s, char *name)
 		{
 			s.zoom = 500;
 			s.color = 1;
-			s.max_step = 6;
+			s.c_r = -0.5;
+			s.c_i = 0.5;
 			mlx_expose_hook(s.win, &expose_hook, &s);
 			mlx_key_hook(s.win, &key_hook, &s);
 			mlx_mouse_hook(s.win, &mouse_hook, &s);
-			write(2, "B", 1);
-//			mlx_hook(s.mlx, MOTION_NOTIFY, PTR_MOTION_MASK, &ptr_motion_hook, &s);
+			mlx_hook(s.win, MOTION_NOTIFY, PTR_MOTION_MASK,
+					&ptr_motion_hook, &s);
 			mlx_loop(s.mlx);
 		}
 	}
