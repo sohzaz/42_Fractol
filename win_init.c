@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/19 19:15:07 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/21 13:00:26 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/21 13:39:44 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ int			key_hook(int key, t_mlx *s)
 	return (0);
 }
 
-void		win_init(t_mlx s, char *name)
+void		win_init(t_mlx s)
 {
 	if ((s.mlx = mlx_init()) != NULL)
 	{
-		s.win = mlx_new_window(s.mlx, WIN_MAX_X, WIN_MAX_Y, name);
+		s.win = mlx_new_window(s.mlx, WIN_MAX_X, WIN_MAX_Y, "42 Fractol");
 		s.img = mlx_new_image(s.mlx, WIN_MAX_X, WIN_MAX_Y);
 		if (s.win != NULL && s.img != NULL)
 		{

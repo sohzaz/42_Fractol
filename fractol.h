@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/20 15:11:58 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/21 12:43:16 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/21 13:46:18 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FRACTOL_H
 # include <mlx.h>
 # include <string.h>
-# include <libft.h>
 # include <stdlib.h>
 # include <math.h>
 # include <unistd.h>
@@ -45,7 +44,7 @@ typedef struct		s_mlxdata{
 	int				xmax;
 	int				ymax;
 }					t_mlx;
-void				win_init(t_mlx s, char *name);
+void				win_init(t_mlx s);
 void				win_draw(t_mlx s);
 void				put_in_image(t_mlx *s, int x, int y, int color);
 void				mandle_set(t_mlx *s);
@@ -56,4 +55,5 @@ int					frac_select(int key, t_mlx *s);
 int					ptr_motion_hook(int x, int y, t_mlx *s);
 int					expose_hook(t_mlx *s);
 void				julia_set(t_mlx *s);
+int					mandle_color(const t_mlx *s, const int i);
 #endif

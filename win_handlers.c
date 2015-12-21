@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 10:39:09 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/21 13:28:07 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/21 13:41:20 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int			frac_select(int key, t_mlx *s)
 	printf("%d\n", key);
 	if (key == 18)
 		s->type = 1;
+	else if (key == 19)
+		s->type = 2;
 	else if (key == 20)
 		s->type = 3;
 	else if (key == 83)
