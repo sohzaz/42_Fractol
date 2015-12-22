@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/21 12:40:34 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/21 13:42:44 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/22 13:41:26 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 int			julia_color(const t_mlx *s, const int i)
 {
-	//return (16777215 * (i < s->max_ite));
+	(void)s;
 	
-	return (mandle_color(s, i));
+	return (0x40 +/* 0x03000 + */0x000804 * i);
+		//	return (mandle_color(s, i));
 }
 
 void			julia_ite(t_mlx *s, int x, int y)
 {
-	int			i;
+	long long	i;
 	double		tmp;
 
 	i = 0;
@@ -48,9 +49,9 @@ void			julia_set(t_mlx *s)
 		while (x < WIN_MAX_X + 1)
 		{
 			s->z_r = 1.5 * (x - s->x_start) / 
-				(0.5 *(s->zoom / 100)* WIN_MAX_X) * 10;
+				(0.5 * (s->zoom / 100) * WIN_MAX_X) * 10;
 			s->z_i =(y - s->y_start) / 
-				(0.5 *(s->zoom / 100)* WIN_MAX_Y) * 10;
+				(0.5 * (s->zoom / 100) * WIN_MAX_Y) * 10;
 			julia_ite(s, x, y);
 			x++;
 		}

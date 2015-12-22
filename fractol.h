@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/20 15:11:58 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/21 13:46:18 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/22 14:08:37 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,22 @@ typedef struct		s_mlxdata{
 	void			*win;
 	void			*img;
 	double			color;
-	int				zoom;
+	long long		zoom;
 	int				type;
 	int				x_start;
 	int				y_start;
-	double			x0;
-	double			y0;
-	double			x1;
-	double			y1;
+//	double			x0;
+//	double			y0;
+//	double			x1;
+//	double			y1;
 	int				max_ite;
 	double			c_r;
 	double			c_i;
 	double			z_r;
 	double			z_i;
-	int				xmax;
-	int				ymax;
+	int				f_lock;
+//	int				xmax;
+//	int				ymax;
 }					t_mlx;
 void				win_init(t_mlx s);
 void				win_draw(t_mlx s);

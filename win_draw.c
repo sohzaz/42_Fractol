@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 10:20:16 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/21 13:40:21 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/22 14:10:48 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ int			mandle_color(const t_mlx *s, const int i)
 	else
 	{
 		v = round(i + 1 - (log2(log(hypot(s->z_r, s->z_i))/log(2))/log2(2)));
-		col = (pow(255, 3) * (2 * v)) * (i < s->max_ite);
+		col = (pow(255, 3) * (2 * v)) /** (i < s->max_ite)*/;
 	}
 	return (col);
 
 }
 static void			mandle_ite(t_mlx *s, int x, int y)
 {
-	int i;
-	double tmp;
+	long long		i;
+	double 			tmp;
 
 	i = 0;
 	while ((pow(s->z_r, 2) + pow(s->z_i, 2) < 4) && (i < s->max_ite))
@@ -78,7 +78,7 @@ int					sierp_carp_draw(t_mlx *s,int x, int y)
 		y /= 3;
 		x /= 3;
 	}
-	return (16777215);
+	return (0x503467);
 }
 
 void				sierp_carp_set(t_mlx *s)
@@ -93,8 +93,8 @@ void				sierp_carp_set(t_mlx *s)
 		while (x < WIN_MAX_X)
 		{
 			put_in_image(s, x, y,sierp_carp_draw(s,
-						abs((x - s->x_start))% (s->zoom * 100),
-						abs((y - s->y_start)% (s->zoom * 100))));
+						llabs((x - s->x_start))% (s->zoom * 100),
+						llabs((y - s->y_start)% (s->zoom * 100))));
 			x++;
 		}
 		y++;

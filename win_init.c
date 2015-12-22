@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/19 19:15:07 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/21 13:39:44 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/22 14:08:57 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int			expose_hook(t_mlx *s)
 		mlx_destroy_image(s->mlx, s->img);
 	if ((s->img = mlx_new_image(s->mlx, WIN_MAX_X, WIN_MAX_Y)) != NULL)
 	{
+		s->max_ite = (s->max_ite <= 70000) ? round(sqrt(s->zoom)) : s->max_ite;
+		printf("%lld|%d\n", s->zoom, s->max_ite);
 		if (s->type == 1)
 			mandle_set(s);
 		else if (s->type == 2)
@@ -57,6 +59,7 @@ void		win_init(t_mlx s)
 		{
 			s.zoom = 500;
 			s.color = 1;
+			s.f_lock = 1;
 			s.c_r = -0.5;
 			s.c_i = 0.5;
 			mlx_expose_hook(s.win, &expose_hook, &s);

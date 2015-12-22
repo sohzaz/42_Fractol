@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/14 10:39:09 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/21 13:41:20 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/22 12:55:50 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,15 @@ int			mouse_zoom_handler(int btn, int x, int y, t_mlx *s)
 	s->zoom = (s->zoom <= 50) ? 50 : s->zoom;
 	if (btn == 4)
 	{	
-		s->x_start += (s->x_start - x) / (s->zoom / 50) ;
-		s->y_start += (s->y_start - y) / (s->zoom / 50) ;
-		s->zoom += 50;
-
+		s->x_start += (s->x_start - x) / (s->zoom / (s->zoom / 3)) ;
+		s->y_start += (s->y_start - y) / (s->zoom / (s->zoom / 3)) ;
+		s->zoom += s->zoom / 3;
 	}
 	else if (btn == 5)
 	{	
-		s->x_start += (s->x_start - x) / (s->zoom / 50) ;
-		s->y_start += (s->y_start - y) / (s->zoom / 50) ;
-		s->zoom -= 50;
+		s->x_start += (s->x_start - x) / (s->zoom / (s->zoom / 3)) ;
+		s->y_start += (s->y_start - y) / (s->zoom / (s->zoom / 3)) ;
+		s->zoom -= s->zoom / 3;
 	}
 	s->zoom = (s->zoom <= 1) ? 1 : s->zoom;
 	return (0);
@@ -45,14 +44,19 @@ int			frac_select(int key, t_mlx *s)
 		s->color = 2;
 	else if (key == 84)
 		s->color = 1;
+	else if (key == 37)
+		s->f_lock *= -1;
 	return (0);
 }
 int				ptr_motion_hook(int x, int y, t_mlx *s)
 {
-	if (x >= 0 && y >= 0 && x <= WIN_MAX_X && y <= WIN_MAX_Y)
+	if (s->f_lock > 0)
 	{
-		s->c_r = (double)x / (double)WIN_MAX_X * 4 - 2;
-		s->c_i = (double)y / (double)WIN_MAX_Y * 4 - 2;
+		if (x >= 0 && y >= 0 && x <= WIN_MAX_X && y <= WIN_MAX_Y)
+		{
+			s->c_r = (double)x / (double)WIN_MAX_X * 4 - 2;
+			s->c_i = (double)y / (double)WIN_MAX_Y * 4 - 2;
+		}
 	}
 	expose_hook(s);
 	return (0);
@@ -66,16 +70,17 @@ void		key_zoom_handler(int key, t_mlx *s)
 	y = WIN_MAX_Y / 2;
 	if (key == 69)
 	{
-		s->x_start += (s->x_start - x) / (s->zoom / 100);
-		s->y_start += (s->y_start - y) / (s->zoom / 100);
+		s->x_start += (s->x_start - x) / (s->zoom / (s->zoom / 3)) ;
+		s->y_start += (s->y_start - y) / (s->zoom / (s->zoom / 3)) ;
+		s->zoom += s->zoom / 3;
 
-		s->zoom += 100;
 	}
 	else if (key == 78)
 	{
-		s->x_start += (s->x_start - x) / (s->zoom / 100) ;
-		s->y_start += (s->y_start - y) / (s->zoom / 100) ;
-		s->zoom -= 100;
+		s->x_start += (s->x_start - x) / (s->zoom / (s->zoom / 3)) ;
+		s->y_start += (s->y_start - y) / (s->zoom / (s->zoom / 3)) ;
+		s->zoom -= s->zoom / 3;
+
 	}
 
 }
