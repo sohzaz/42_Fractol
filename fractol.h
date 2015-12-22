@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/20 15:11:58 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/22 14:08:37 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/22 17:47:51 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include <math.h>
 # include <unistd.h>
 # include <stdio.h>
-# define WIN_MAX_X 1960 
-# define WIN_MAX_Y 1080  
+# define WIN_MAX_X 640
+# define WIN_MAX_Y 480
 # define PTR_MOTION_MASK (1L << 6)
-# define MOTION_NOTIFY 6 
+# define MOTION_NOTIFY 6
 
 typedef struct		s_mlxdata{
 	void			*mlx;
@@ -30,20 +30,14 @@ typedef struct		s_mlxdata{
 	double			color;
 	long long		zoom;
 	int				type;
-	int				x_start;
-	int				y_start;
-//	double			x0;
-//	double			y0;
-//	double			x1;
-//	double			y1;
+	long long		x_start;
+	long long		y_start;
 	int				max_ite;
 	double			c_r;
 	double			c_i;
 	double			z_r;
 	double			z_i;
 	int				f_lock;
-//	int				xmax;
-//	int				ymax;
 }					t_mlx;
 void				win_init(t_mlx s);
 void				win_draw(t_mlx s);
@@ -51,10 +45,11 @@ void				put_in_image(t_mlx *s, int x, int y, int color);
 void				mandle_set(t_mlx *s);
 void				sierp_carp_set(t_mlx *s);
 int					mouse_zoom_handler(int btn, int x, int y, t_mlx *s);
-int			        key_win_handler(int key, t_mlx *s);
+int					key_win_handler(int key, t_mlx *s);
 int					frac_select(int key, t_mlx *s);
 int					ptr_motion_hook(int x, int y, t_mlx *s);
 int					expose_hook(t_mlx *s);
 void				julia_set(t_mlx *s);
 int					mandle_color(const t_mlx *s, const int i);
+void				win_reset(t_mlx *s);
 #endif

@@ -6,43 +6,42 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 10:20:16 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/22 14:10:48 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/22 18:04:16 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int			mandle_color(const t_mlx *s, const int i)
+int					mandle_color(const t_mlx *s, const int i)
 {
 	int				col;
 	int				v;
 
 	if (s->color == 1)
-		col = (pow(255, 3) * (3 * i) ) * (i < s->max_ite);
+		col = 0x050601 * i + 0x10000000;
 	else
 	{
-		v = round(i + 1 - (log2(log(hypot(s->z_r, s->z_i))/log(2))/log2(2)));
-		col = (pow(255, 3) * (2 * v)) /** (i < s->max_ite)*/;
+		v = round(i + 1 - (log2(log2(hypot(s->z_r, s->z_i))
+						/ log(2)) / log2(2)));
+		col = (0x050601 * v);
 	}
 	return (col);
-
 }
+
 static void			mandle_ite(t_mlx *s, int x, int y)
 {
 	long long		i;
-	double 			tmp;
+	double			tmp;
 
 	i = 0;
 	while ((pow(s->z_r, 2) + pow(s->z_i, 2) < 4) && (i < s->max_ite))
 	{
-
 		tmp = s->z_r;
 		s->z_r = pow(s->z_r, 2) - pow(s->z_i, 2) + s->c_r;
 		s->z_i = 2 * s->z_i * tmp + s->c_i;
 		i += 1;
 	}
 	put_in_image(s, x, y, mandle_color(s, i));
-
 }
 
 void				mandle_set(t_mlx *s)
@@ -51,7 +50,7 @@ void				mandle_set(t_mlx *s)
 	int				y;
 
 	y = WIN_MAX_Y + 1;
-	while (y  >= 0)
+	while (y >= 0)
 	{
 		x = WIN_MAX_X + 1;
 		while (x >= 0)
@@ -65,15 +64,13 @@ void				mandle_set(t_mlx *s)
 		}
 		y--;
 	}
-
 }
 
-int					sierp_carp_draw(t_mlx *s,int x, int y)
+int					sierp_carp_draw(int x, int y)
 {
-	(void)s;
 	while (x > 0 || y > 0)
 	{
-		if ((x % 3 == 1 )&& (y  % 3 == 1))
+		if ((x % 3 == 1) && (y % 3 == 1))
 			return (0);
 		y /= 3;
 		x /= 3;
@@ -92,9 +89,9 @@ void				sierp_carp_set(t_mlx *s)
 		x = 0;
 		while (x < WIN_MAX_X)
 		{
-			put_in_image(s, x, y,sierp_carp_draw(s,
-						llabs((x - s->x_start))% (s->zoom * 100),
-						llabs((y - s->y_start)% (s->zoom * 100))));
+			put_in_image(s, x, y, sierp_carp_draw(
+						llabs((x - s->x_start)) % (s->zoom * 100),
+						llabs((y - s->y_start) % (s->zoom * 100))));
 			x++;
 		}
 		y++;

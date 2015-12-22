@@ -6,18 +6,16 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/21 12:40:34 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/22 13:41:26 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/22 17:41:32 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int			julia_color(const t_mlx *s, const int i)
+int				julia_color(const t_mlx *s, const int i)
 {
 	(void)s;
-	
-	return (0x40 +/* 0x03000 + */0x000804 * i);
-		//	return (mandle_color(s, i));
+	return (0x40 + 0x000804 * i);
 }
 
 void			julia_ite(t_mlx *s, int x, int y)
@@ -28,7 +26,6 @@ void			julia_ite(t_mlx *s, int x, int y)
 	i = 0;
 	while ((pow(s->z_r, 2) + pow(s->z_i, 2) < 4) && (i < s->max_ite))
 	{
-
 		tmp = s->z_r;
 		s->z_r = pow(s->z_r, 2) - pow(s->z_i, 2) + s->c_r;
 		s->z_i = 2 * s->z_i * tmp + s->c_i;
@@ -48,10 +45,10 @@ void			julia_set(t_mlx *s)
 		x = 0;
 		while (x < WIN_MAX_X + 1)
 		{
-			s->z_r = 1.5 * (x - s->x_start) / 
-				(0.5 * (s->zoom / 100) * WIN_MAX_X) * 10;
-			s->z_i =(y - s->y_start) / 
-				(0.5 * (s->zoom / 100) * WIN_MAX_Y) * 10;
+			s->z_r = 1.5 * (x - s->x_start) /
+				(0.25 * (s->zoom / 100) * WIN_MAX_X) * 10;
+			s->z_i = (y - s->y_start) /
+				(0.25 * (s->zoom / 100) * WIN_MAX_Y) * 10;
 			julia_ite(s, x, y);
 			x++;
 		}
