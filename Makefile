@@ -13,14 +13,9 @@
 NAME = fractol 
 OS = $(shell uname)
 CFLAGS = -Wall -Wextra -Werror -O2 
-SRC = main.c draw_tools.c win_draw.c win_init.c win_handlers.c julia.c 
-ifeq ($(OS), Darwin) 
-	MLX = minlibx
-	MFLAGS = -framework OpenGL -framework AppKit -lmlx -lm
-else ifeq ($(OS), Linux)
-	MLX = minlibx_X11
-	MFLAGS = -lmlx -lXext -lX11 -lm
-endif
+SRC = main.c draw_tools.c win_draw.c win_init.c win_handlers.c julia.c
+MLX = mlx
+MFLAGS = -framework OpenGL -framework AppKit -lmlx -lm
 
 
 OBJ = $(SRC:.c=.o)
