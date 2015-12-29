@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/20 15:11:58 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/22 17:47:51 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/29 11:55:17 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include <math.h>
 # include <unistd.h>
-# include <stdio.h>
 # define WIN_MAX_X 640
 # define WIN_MAX_Y 480
 # define PTR_MOTION_MASK (1L << 6)

@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/21 12:40:34 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/22 17:41:32 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/29 11:55:15 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 int				julia_color(const t_mlx *s, const int i)
 {
-	(void)s;
-	return (0x40 + 0x000804 * i);
+	if (s->color == 1)
+		return (0x40 + 0x000804 * i);
+	else
+		return (0x11 * i + 0x032500);
 }
 
 void			julia_ite(t_mlx *s, int x, int y)

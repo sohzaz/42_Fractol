@@ -6,7 +6,7 @@
 /*   By: dbreton <dbreton@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/29 10:20:16 by dbreton           #+#    #+#             */
-/*   Updated: 2015/12/22 18:04:16 by dbreton          ###   ########.fr       */
+/*   Updated: 2015/12/29 11:55:12 by dbreton          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,11 @@
 int					mandle_color(const t_mlx *s, const int i)
 {
 	int				col;
-	int				v;
 
 	if (s->color == 1)
 		col = 0x050601 * i + 0x10000000;
 	else
-	{
-		v = round(i + 1 - (log2(log2(hypot(s->z_r, s->z_i))
-						/ log(2)) / log2(2)));
-		col = (0x050601 * v);
-	}
+		col = (0x010606 * i);
 	return (col);
 }
 
@@ -57,8 +52,10 @@ void				mandle_set(t_mlx *s)
 		{
 			s->z_r = 0.0;
 			s->z_i = 0.0;
-			s->c_r = (float)(x - s->x_start) / s->zoom;
-			s->c_i = (float)(y - s->y_start) / s->zoom;
+			s->c_r = 1.5 * (x - s->x_start) /
+				(0.25 * (s->zoom / 100) * WIN_MAX_X) * 10;
+			s->c_i =(y - s->y_start) /
+				(0.25 * (s->zoom / 100) * WIN_MAX_Y) * 10;
 			mandle_ite(s, x, y);
 			x -= 1;
 		}
