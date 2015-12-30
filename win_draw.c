@@ -50,12 +50,7 @@ void				mandle_set(t_mlx *s)
 		x = WIN_MAX_X + 1;
 		while (x >= 0)
 		{
-			s->z_r = 0.0;
-			s->z_i = 0.0;
-			s->c_r = 1.5 * (x - s->x_start) /
-				(0.25 * (s->zoom / 100) * WIN_MAX_X) * 10;
-			s->c_i =(y - s->y_start) /
-				(0.25 * (s->zoom / 100) * WIN_MAX_Y) * 10;
+                        get_numbers(s, x, y);
 			mandle_ite(s, x, y);
 			x -= 1;
 		}

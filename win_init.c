@@ -29,10 +29,8 @@ int			expose_hook(t_mlx *s)
 	if ((s->img = mlx_new_image(s->mlx, WIN_MAX_X, WIN_MAX_Y)) != NULL)
 	{
 		s->max_ite = round(sqrt(s->zoom));
-		if (s->type == 1)
+		if (s->type == 1 || s->type == 2)
 			mandle_set(s);
-		else if (s->type == 2)
-			julia_set(s);
 		else if (s->type == 3)
 			sierp_carp_set(s);
 		mlx_clear_window(s->mlx, s->win);
